@@ -10,4 +10,36 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Customize to your needs..
+
+# set autocompletion path
+fpath=(
+  /usr/local/share/zsh/site-functions
+  $fpath
+)
+
+# disable auto correction
+unsetopt CORRECT_ALL
+
+# init rbenv
+eval "$(rbenv init -)"
+
+# GOPATH
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# alias
+alias g='git'
+alias vi='vim'
+alias zshrc='vim ~/.zshrc'
+alias zprofile='vim ~/.zprofile'
+alias be='bundle exec'
+
+alias doc='docker-compose'
+alias dos='docker-sync'
+alias docker-gc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
+
+alias gitremovel="git branch --merged | grep -vE '^\*|master$|develop$' | xargs -I % git branch -d %"
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
