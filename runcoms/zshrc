@@ -80,23 +80,10 @@ alias gitremovel="git branch --merged | grep -vE '^\*|master$|develop$' | xargs 
 # curl with header response
 alias curl-header='curl -D - -s -o /dev/null'
 
+# ghq look equivalent
+alias glook='cd $(ghq list --full-path | peco)'
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mickamy/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mickamy/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/mickamy/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mickamy/google-cloud-sdk/completion.zsh.inc'; fi
-
-# ghq look
-# https://tech.515hikaru.net/2020-01-28-ghq-look/
-ghq() {
-    if [[ $1 == "look" ]]; then
-        if [[ -n $2 ]]; then
-            command cd $(ghq list --full-path --exact $2)
-        else
-            command cd $(ghq  list --full-path | peco)
-        fi
-    else
-        command ghq "$@"
-    fi
-}
-
