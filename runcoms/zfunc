@@ -47,3 +47,7 @@ switch-role () {
    export AWS_SECRET_ACCESS_KEY=$(echo $output | jq -r .Credentials.SecretAccessKey)
    export AWS_SESSION_TOKEN=$(echo $output | jq -r .Credentials.SessionToken)
 }
+
+killport () {
+  lsof -ti tcp:"$1" | xargs -r kill -9
+}
