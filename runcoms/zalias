@@ -1,0 +1,42 @@
+#
+# alias
+#
+
+alias g='git'
+alias ls='ls -FG'
+alias ll='ls -altFG'
+alias vi='vim'
+alias zshrc='vi ~/.zshrc'
+alias zprofile='vi ~/.zprofile'
+
+# gnu sed
+alias sed='gsed'
+
+# ruby
+alias be='bundle exec'
+
+# docker
+alias d='docker'
+alias doc='docker compose'
+alias dos='docker-sync'
+alias docker-gc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
+alias dogc='docker-gc'
+
+# SourceTree
+alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+
+# remove merged branches on local
+alias gitremovel="git branch --merged | grep -vE '^\*|master$|develop$|dev$|main$' | xargs -I % git branch -d %"
+
+# curl with header response
+alias curl-header='curl -D - -s -o /dev/null'
+
+# ghq look equivalent
+alias glook='peco-src'
+
+# oj test with ruby
+alias ojtrb='oj t -c "ruby main.rb" -d tests'
+
+# aws-cdk
+alias cdk="npx aws-cdk"
+alias ecr-login="aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"

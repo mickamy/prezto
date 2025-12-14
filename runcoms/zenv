@@ -1,0 +1,38 @@
+#
+# env
+#   - init process of app
+#   - declaring $PATH
+#
+
+export PATH="$HOME/bin:$PATH"
+
+# dotfiles
+export DOTFILES_HOME=$HOME/ghq/github.com/mickamy/dotfiles
+export PATH="$DOTFILES_HOME/bin:$PATH"
+
+# docker
+export PATH=$PATH:/Applications/Docker.app/Contents/Resources/cli-plugins
+
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME:$ANDROID_HOME/emulator:$ANDROID_HOME/tools/:$ANDROID_HOME/platform-tools
+
+LATEST_BUILD_TOOLS_DIR=$(ls -v "$HOME/Library/Android/sdk/build-tools" | tail -n 1)
+export PATH="$HOME/Library/Android/sdk/build-tools/$LATEST_BUILD_TOOLS_DIR:$PATH"
+
+# gpg
+export GPG_TTY=$(tty)
+
+# JetBrains
+export PATH=$PATH:/Users/mickamy/Library/Application\ Support/JetBrains/Toolbox/scripts
+
+# aws
+export AWS_DEFAULT_PROFILE="mishuku"
+export AWS_CONFIG="$HOME/.aws"
+
+# deno
+export DENO_INSTALL="/Users/mickamy/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"

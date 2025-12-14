@@ -10,4 +10,59 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+source "${ZDOTDIR:-$HOME}/.zenv"
+source "${ZDOTDIR:-$HOME}/.zalias"
+source "${ZDOTDIR:-$HOME}/.zfunc"
+
+# iTerm2 shell integration
+source ~/.iterm2_shell_integration.zsh
+
+# for command like `bundle exec rake parallel:spec[2]`
+setopt nonomatch
+
+# Set autocompletion path
+fpath=(
+  /opt/homebrew/share/zsh/site-functions
+  $fpath
+)
+autoload -Uz compinit
+compinit
+
+autoload bashcompinit && bashcompinit
+complete -C aws_completer aws
+
+autoload -U add-zsh-hook
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+eval "$(mise activate zsh)"
+
+source <(docker completion zsh)
+
+if [[ -n "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent_sock" ]]; then
+  ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent_sock"
+  export SSH_AUTH_SOCK="$HOME/.ssh/agent_sock"
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+
+export PATH="$PATH:/Users/mickamy/.local/bin"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mickamy/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mickamy/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mickamy/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mickamy/google-cloud-sdk/completion.zsh.inc'; fi
+
+eval "$(direnv hook zsh)"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/mickamy/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
